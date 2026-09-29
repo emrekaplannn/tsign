@@ -175,7 +175,16 @@ export default function WhyUs({ t }) {
                 "{t.whyUs.quote}"
               </p>
               <div style={{ marginLeft: 'auto', flexShrink: 0 }}>
-                <Logo size="small" />
+                <img
+                  src="/gorsel-icerikler/logo ve appler/damla.png"
+                  alt="TSigN Damla"
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    objectFit: 'contain',
+                    filter: 'drop-shadow(0 4px 10px rgba(26, 86, 219, 0.4))'
+                  }}
+                />
               </div>
             </div>
           </div>

@@ -1,16 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
-import { Menu, X, Globe, ArrowRight, Phone } from 'lucide-react';
+import { Menu, X, Globe, ArrowRight, Sparkles } from 'lucide-react';
 
+/**
+ * Navbar Component
+ * Modern, floating (yüzen) glassmorphism header designed for professional usability.
+ * Features an isolated high-res emblem, interactive navigation pills, language toggler,
+ * and high-converting CTA.
+ */
 export default function Navbar({ lang, setLang, t, onOpenQuote }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeHash, setActiveHash] = useState('#home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
+
+      // Determine active section based on scroll position
+      const sections = ['#home', '#services', '#tech', '#whyUs', '#projects', '#team', '#academy', '#careers', '#contact'];
+      for (const sectionId of sections) {
+        const el = document.querySelector(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 140 && rect.bottom >= 140) {
+            setActiveHash(sectionId);
+            break;
+          }
+        }
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -18,7 +39,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
     { href: '#home', label: t.nav.home },
     { href: '#services', label: t.nav.services },
     { href: '#tech', label: t.nav.tech },
-    { href: '#whyUs', label: t.whyUs.tag },
+    { href: '#whyUs', label: t.whyUs.tag || 'Neden Biz?' },
     { href: '#projects', label: t.nav.projects },
     { href: '#team', label: t.nav.team },
     { href: '#academy', label: t.nav.academy },
@@ -29,9 +50,10 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
   const handleLinkClick = (e, href) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    setActiveHash(href);
     const target = document.querySelector(href);
     if (target) {
-      const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+      const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 95;
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
@@ -40,76 +62,144 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
   };
 
   return (
-    <header style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 1000,
-      transition: 'all 0.3s ease',
-      backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.92)' : 'rgba(248, 249, 250, 0.85)',
-      backdropFilter: 'blur(16px)',
-      borderBottom: scrolled ? '1px solid rgba(226, 232, 240, 0.9)' : '1px solid transparent',
-      boxShadow: scrolled ? '0 10px 30px -10px rgba(10, 30, 63, 0.08)' : 'none',
-      padding: scrolled ? '0.75rem 0' : '1.1rem 0'
-    }}>
-      <div className="container" style={{
+    <div
+      style={{
+        position: 'fixed',
+        top: scrolled ? '0.75rem' : '1.15rem',
+        left: 0,
+        right: 0,
+        zIndex: 1000,
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
-        {/* Brand Logo */}
-        <a href="#home" onClick={(e) => handleLinkClick(e, '#home')}>
-          <Logo size="medium" />
+        justifyContent: 'center',
+        padding: '0 1rem',
+        pointerEvents: 'none', // Allows clicking background outside floating pill
+        transition: 'top 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
+      }}
+    >
+      <header
+        className="floating-navbar-container"
+        style={{
+          pointerEvents: 'auto',
+          width: '100%',
+          maxWidth: '1240px',
+          borderRadius: '9999px',
+          background: scrolled
+            ? 'rgba(255, 255, 255, 0.94)'
+            : 'rgba(255, 255, 255, 0.86)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          border: '1px solid rgba(255, 255, 255, 0.85)',
+          boxShadow: scrolled
+            ? '0 18px 40px -12px rgba(10, 30, 63, 0.16), 0 0 0 1px rgba(226, 232, 240, 0.85)'
+            : '0 12px 32px -10px rgba(10, 30, 63, 0.1), 0 0 0 1px rgba(226, 232, 240, 0.6)',
+          padding: scrolled ? '0.55rem 1.25rem' : '0.7rem 1.6rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+      >
+        {/* Left Side: Prominent Standalone TSigN Emblem (No Text) */}
+        <a
+          href="#home"
+          onClick={(e) => handleLinkClick(e, '#home')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            textDecoration: 'none',
+            paddingRight: '0.75rem',
+            transition: 'transform 0.25s ease'
+          }}
+          className="brand-logo-link"
+          aria-label="TSigN Home"
+        >
+          <Logo
+            showText={false}
+            size="large"
+            height={scrolled ? '55px' : '72px'}
+          />
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav style={{
-          display: 'none',
-          alignItems: 'center',
-          gap: '1.4rem'
-        }} className="desktop-nav">
-          {navLinks.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              onClick={(e) => handleLinkClick(e, item.href)}
-              style={{
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                color: '#334155',
-                transition: 'color 0.2s ease',
-                position: 'relative',
-                padding: '0.25rem 0'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#1A56DB')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#334155')}
-            >
-              {item.label}
-            </a>
-          ))}
+        {/* Center: Desktop Navigation Links (Pill Style) */}
+        <nav
+          className="desktop-nav-menu"
+          style={{
+            display: 'none',
+            alignItems: 'center',
+            gap: '0.25rem',
+            backgroundColor: 'rgba(241, 245, 249, 0.65)',
+            padding: '0.3rem 0.45rem',
+            borderRadius: '9999px',
+            border: '1px solid rgba(226, 232, 240, 0.7)'
+          }}
+        >
+          {navLinks.map((item, index) => {
+            const isActive = activeHash === item.href;
+            return (
+              <a
+                key={index}
+                href={item.href}
+                onClick={(e) => handleLinkClick(e, item.href)}
+                style={{
+                  fontSize: '0.825rem',
+                  fontWeight: isActive ? 700 : 600,
+                  color: isActive ? '#1A56DB' : '#475569',
+                  backgroundColor: isActive ? '#FFFFFF' : 'transparent',
+                  padding: '0.42rem 0.85rem',
+                  borderRadius: '9999px',
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  boxShadow: isActive ? '0 2px 8px rgba(26, 86, 219, 0.12)' : 'none',
+                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = '#1A56DB';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.75)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = '#475569';
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
-        {/* Right Action Tools */}
+        {/* Right Side: Language Toggle & High-Impact CTA Button */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          {/* Language Switcher */}
+          {/* Language Switcher Pill */}
           <button
             onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '0.45rem 0.8rem',
+              padding: '0.45rem 0.85rem',
               borderRadius: '9999px',
-              border: '1px solid #CBD5E1',
+              border: '1px solid #E2E8F0',
               backgroundColor: '#FFFFFF',
               color: '#0A1E3F',
-              fontSize: '0.8125rem',
+              fontSize: '0.8rem',
               fontWeight: 700,
               cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
               transition: 'all 0.2s ease'
             }}
-            title="Dili Değiştir / Change Language"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#1A56DB';
+              e.currentTarget.style.color = '#1A56DB';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = '#E2E8F0';
+              e.currentTarget.style.color = '#0A1E3F';
+            }}
+            title={lang === 'tr' ? "Switch to English" : "Türkçe'ye Geç"}
           >
             <Globe size={14} color="#1A56DB" />
             <span>{lang.toUpperCase()}</span>
@@ -118,102 +208,181 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
           {/* Quote Button (Desktop) */}
           <button
             onClick={onOpenQuote}
-            className="btn btn-primary quote-btn-desktop"
+            className="quote-btn-desktop"
             style={{
-              padding: '0.55rem 1.25rem',
-              fontSize: '0.875rem'
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: scrolled ? '0.55rem 1.35rem' : '0.62rem 1.5rem',
+              borderRadius: '9999px',
+              border: 'none',
+              background: 'linear-gradient(135deg, #1A56DB 0%, #0284C7 100%)',
+              color: '#FFFFFF',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 6px 18px rgba(26, 86, 219, 0.28)',
+              transition: 'all 0.25s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(26, 86, 219, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 86, 219, 0.28)';
             }}
           >
             <span>{t.nav.getQuote}</span>
             <ArrowRight size={15} />
           </button>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Menu Hamburger Button */}
           <button
             className="mobile-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
               display: 'none',
-              padding: '0.5rem',
-              borderRadius: '8px',
+              padding: '0.55rem',
+              borderRadius: '50%',
               border: '1px solid #E2E8F0',
               backgroundColor: '#FFFFFF',
-              color: '#0A1E3F'
+              color: '#0A1E3F',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
             }}
-            aria-label="Toggle menu"
+            aria-label="Menüyü Aç/Kapat"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Floating Mobile Drawer Dropdown Menu */}
       {mobileMenuOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          backgroundColor: '#FFFFFF',
-          borderBottom: '1px solid #E2E8F0',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.12)',
-          padding: '1.5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          animation: 'fadeIn 0.2s ease-out'
-        }}>
-          {navLinks.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              onClick={(e) => handleLinkClick(e, item.href)}
+        <div
+          style={{
+            position: 'absolute',
+            top: 'calc(100% + 0.5rem)',
+            left: '1rem',
+            right: '1rem',
+            maxWidth: '1240px',
+            margin: '0 auto',
+            pointerEvents: 'auto',
+            backgroundColor: 'rgba(255, 255, 255, 0.98)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            borderRadius: '24px',
+            border: '1px solid rgba(226, 232, 240, 0.9)',
+            boxShadow: '0 20px 50px rgba(10, 30, 63, 0.18)',
+            padding: '1.25rem 1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.4rem',
+            animation: 'fadeInSlide 0.25s ease-out'
+          }}
+        >
+          {navLinks.map((item, index) => {
+            const isActive = activeHash === item.href;
+            return (
+              <a
+                key={index}
+                href={item.href}
+                onClick={(e) => handleLinkClick(e, item.href)}
+                style={{
+                  fontSize: '0.95rem',
+                  fontWeight: isActive ? 700 : 600,
+                  color: isActive ? '#1A56DB' : '#1E293B',
+                  backgroundColor: isActive ? 'rgba(26, 86, 219, 0.08)' : 'transparent',
+                  padding: '0.7rem 1rem',
+                  borderRadius: '12px',
+                  textDecoration: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  transition: 'background-color 0.2s ease'
+                }}
+              >
+                <span>{item.label}</span>
+                {isActive && <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#1A56DB' }} />}
+              </a>
+            );
+          })}
+
+          <div style={{ marginTop: '0.5rem', paddingTop: '0.75rem', borderTop: '1px solid #F1F5F9' }}>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenQuote();
+              }}
               style={{
-                fontSize: '1rem',
-                fontWeight: 600,
-                color: '#1E293B',
-                padding: '0.5rem 0',
-                borderBottom: '1px solid #F1F5F9'
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '0.85rem 1.5rem',
+                borderRadius: '14px',
+                border: 'none',
+                background: 'linear-gradient(135deg, #1A56DB 0%, #0284C7 100%)',
+                color: '#FFFFFF',
+                fontSize: '0.95rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(26, 86, 219, 0.3)'
               }}
             >
-              {item.label}
-            </a>
-          ))}
-          <button
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onOpenQuote();
-            }}
-            className="btn btn-primary"
-            style={{ width: '100%', marginTop: '0.5rem' }}
-          >
-            {t.nav.getQuote}
-          </button>
+              <span>{t.nav.getQuote}</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Responsive Inline CSS for Desktop & Mobile Toggle */}
+      {/* Responsive Breakpoints & Animations */}
       <style>{`
-        @media (min-width: 1040px) {
-          .desktop-nav {
-            display: flex !important;
+        @keyframes fadeInSlide {
+          from {
+            opacity: 0;
+            transform: translateY(-8px);
           }
-          .mobile-toggle-btn {
-            display: none !important;
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
-        @media (max-width: 1039px) {
-          .desktop-nav {
+
+        .brand-logo-link:hover {
+          transform: scale(1.04);
+        }
+
+        @media (min-width: 1100px) {
+          .desktop-nav-menu {
+            display: flex !important;
+          }
+          .mobile-toggle-btn {
+            display: none !important;
+          }
+          .quote-btn-desktop {
+            display: inline-flex !important;
+          }
+        }
+
+        @media (max-width: 1099px) {
+          .desktop-nav-menu {
             display: none !important;
           }
           .mobile-toggle-btn {
-            display: flex !important;
+            display: inline-flex !important;
           }
           .quote-btn-desktop {
             display: none !important;
           }
+          .floating-navbar-container {
+            padding: 0.5rem 1rem !important;
+          }
         }
       `}</style>
-    </header>
+    </div>
   );
 }

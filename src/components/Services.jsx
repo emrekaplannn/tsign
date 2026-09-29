@@ -86,20 +86,37 @@ export default function Services({ t, onOpenQuote }) {
               }} />
 
               <div>
-                {/* Metallic Droplet / Icon Container */}
+                {/* Service Header: Discipline Icon & 3D Metallic Droplet Motif */}
                 <div style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '16px',
-                  background: 'linear-gradient(135deg, #0A1E3F 0%, #1A56DB 100%)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#FFFFFF',
-                  marginBottom: '1.5rem',
-                  boxShadow: '0 8px 20px rgba(26, 86, 219, 0.28)'
+                  justifyContent: 'space-between',
+                  marginBottom: '1.5rem'
                 }}>
-                  {iconMap[service.id]}
+                  <div style={{
+                    width: '60px',
+                    height: '60px',
+                    borderRadius: '16px',
+                    background: 'linear-gradient(135deg, #0A1E3F 0%, #1A56DB 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#FFFFFF',
+                    boxShadow: '0 8px 20px rgba(26, 86, 219, 0.28)'
+                  }}>
+                    {iconMap[service.id]}
+                  </div>
+
+                  <img
+                    src="/gorsel-icerikler/logo ve appler/damla.png"
+                    alt="TSigN Droplet Motif"
+                    style={{
+                      width: '44px',
+                      height: '44px',
+                      objectFit: 'contain',
+                      filter: 'drop-shadow(0 4px 10px rgba(26, 86, 219, 0.35))'
+                    }}
+                  />
                 </div>
 
                 {/* Service Title */}
