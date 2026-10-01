@@ -3,12 +3,12 @@ import { Users, GraduationCap, Award, Compass, HardHat, Ruler, Code, Layout, Bui
 
 export default function Team({ t }) {
   const iconRoleMap = {
-    'hard-hat': <HardHat size={22} color="#1A56DB" />,
-    'compass': <Compass size={22} color="#1A56DB" />,
-    'ruler': <Ruler size={22} color="#1A56DB" />,
-    'code': <Code size={22} color="#1A56DB" />,
-    'layout': <Layout size={22} color="#1A56DB" />,
-    'building': <Building2 size={22} color="#1A56DB" />,
+    'hard-hat': <HardHat size={22} color="#040070" />,
+    'compass': <Compass size={22} color="#040070" />,
+    'ruler': <Ruler size={22} color="#040070" />,
+    'code': <Code size={22} color="#040070" />,
+    'layout': <Layout size={22} color="#040070" />,
+    'building': <Building2 size={22} color="#040070" />,
   };
 
   return (
@@ -51,7 +51,7 @@ export default function Team({ t }) {
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
                 e.currentTarget.style.boxShadow = '0 16px 36px rgba(10, 30, 63, 0.1)';
-                e.currentTarget.style.borderColor = '#1A56DB';
+                e.currentTarget.style.borderColor = '#040070';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -71,12 +71,12 @@ export default function Team({ t }) {
                     width: '52px',
                     height: '52px',
                     borderRadius: '14px',
-                    backgroundColor: 'rgba(26, 86, 219, 0.08)',
+                    backgroundColor: 'rgba(4, 0, 112, 0.08)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}>
-                    {iconRoleMap[member.icon] || <Users size={22} color="#1A56DB" />}
+                    {iconRoleMap[member.icon] || <Users size={22} color="#040070" />}
                   </div>
 
                   <span style={{
@@ -85,7 +85,7 @@ export default function Team({ t }) {
                     padding: '0.25rem 0.65rem',
                     borderRadius: '9999px',
                     backgroundColor: '#F1F4F9',
-                    color: '#1E3A8A'
+                    color: '#040070'
                   }}>
                     TSigN Uzmanı
                   </span>
@@ -105,7 +105,7 @@ export default function Team({ t }) {
                 <div style={{
                   fontSize: '0.95rem',
                   fontWeight: 700,
-                  color: '#1A56DB',
+                  color: '#040070',
                   marginBottom: '0.75rem'
                 }}>
                   {member.role}

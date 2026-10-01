@@ -94,7 +94,7 @@ export default function HeroVisual({
                 style={{
                   padding: '0.45rem 0.95rem',
                   borderRadius: '8px',
-                  backgroundColor: '#1A56DB',
+                  backgroundColor: '#040070ff',
                   color: '#FFFFFF',
                   fontSize: '0.75rem',
                   fontWeight: 700,
@@ -103,8 +103,8 @@ export default function HeroVisual({
                   transition: 'background-color 0.2s ease, transform 0.15s ease',
                   flexShrink: 0
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1e40af')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1A56DB')}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#0041d7ff')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#040070ff')}
               >
                 {quoteButtonText}
               </button>

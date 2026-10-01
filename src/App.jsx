@@ -11,6 +11,7 @@ import Careers from './components/Careers';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
+import SideVideo from './components/SideVideo';
 import { tsignData } from './data/tsignData';
 
 export default function App() {
@@ -47,6 +48,9 @@ export default function App() {
 
       {/* Corporate Footer */}
       <Footer t={t} onOpenQuote={handleOpenQuote} />
+
+      {/* Fixed Side Video Panel (Pinned to Right Edge) */}
+      <SideVideo />
 
       {/* Global Interactive Quote Request Modal */}
       <QuoteModal isOpen={quoteModalOpen} onClose={handleCloseQuote} />

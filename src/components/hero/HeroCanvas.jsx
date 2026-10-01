@@ -7,8 +7,8 @@ import React, { useEffect, useRef } from 'react';
  */
 export default function HeroCanvas({
   nodeCount = 22,
-  primaryColor = '#1A56DB',
-  secondaryColor = '#0284C7',
+  primaryColor = '#040070',
+  secondaryColor = '#0041d7',
   accentColor = '#38BDF8',
   particleOpacity = 0.15,
   className = '',
@@ -90,7 +90,7 @@ export default function HeroCanvas({
           if (dist < 140) {
             ctx.save();
             ctx.globalAlpha = currentOpacity * (1 - dist / 140) * 0.85;
-            ctx.strokeStyle = '#1A56DB';
+            ctx.strokeStyle = primaryColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(n.x, n.y);

@@ -88,8 +88,8 @@ export default function QuoteModal({ isOpen, onClose }) {
               gap: '6px',
               padding: '0.3rem 0.85rem',
               borderRadius: '9999px',
-              backgroundColor: 'rgba(26, 86, 219, 0.08)',
-              color: '#1A56DB',
+              backgroundColor: 'rgba(4, 0, 112, 0.08)',
+              color: '#040070',
               fontSize: '0.8rem',
               fontWeight: 700,
               marginBottom: '0.75rem'

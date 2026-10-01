@@ -51,7 +51,7 @@ export default function Careers({ t }) {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.borderColor = '#1A56DB';
+                e.currentTarget.style.borderColor = '#040070';
                 e.currentTarget.style.boxShadow = '0 16px 36px rgba(10, 30, 63, 0.08)';
               }}
               onMouseLeave={(e) => {
@@ -70,12 +70,12 @@ export default function Careers({ t }) {
                   marginBottom: '1rem'
                 }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={13} color="#1A56DB" />
+                    <MapPin size={13} color="#040070" />
                     {job.location}
                   </span>
                   <span>•</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Clock size={13} color="#1A56DB" />
+                    <Clock size={13} color="#040070" />
                     {job.type}
                   </span>
                 </div>
@@ -167,7 +167,7 @@ export default function Careers({ t }) {
               </div>
             ) : (
               <div>
-                <span style={{ fontSize: '0.8rem', color: '#1A56DB', fontWeight: 700, textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.8rem', color: '#040070', fontWeight: 700, textTransform: 'uppercase' }}>
                   Kariyer Başvurusu
                 </span>
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0A1E3F', marginTop: '0.3rem', marginBottom: '1.5rem' }}>
@@ -243,7 +243,7 @@ export default function Careers({ t }) {
                       backgroundColor: '#F8FAFC',
                       cursor: 'pointer'
                     }}>
-                      <Upload size={22} color="#1A56DB" style={{ margin: '0 auto 6px auto' }} />
+                      <Upload size={22} color="#040070" style={{ margin: '0 auto 6px auto' }} />
                       <div style={{ fontSize: '0.85rem', color: '#475569', fontWeight: 600 }}>
                         PDF veya Word Belgesi Seçin
                       </div>

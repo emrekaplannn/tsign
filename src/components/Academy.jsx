@@ -61,7 +61,7 @@ export default function Academy({ t }) {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.borderColor = '#1A56DB';
+                e.currentTarget.style.borderColor = '#040070';
                 e.currentTarget.style.boxShadow = '0 16px 36px rgba(10, 30, 63, 0.08)';
               }}
               onMouseLeave={(e) => {
@@ -82,13 +82,13 @@ export default function Academy({ t }) {
                     borderRadius: '9999px',
                     fontSize: '0.75rem',
                     fontWeight: 700,
-                    backgroundColor: 'rgba(26, 86, 219, 0.1)',
-                    color: '#1A56DB'
+                    backgroundColor: 'rgba(4, 0, 112, 0.1)',
+                    color: '#040070'
                   }}>
                     {course.badge}
                   </span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: '#64748B' }}>
-                    <Clock size={13} color="#1A56DB" />
+                    <Clock size={13} color="#040070" />
                     <span>{course.duration}</span>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ export default function Academy({ t }) {
           border: '1px solid #E2E8F0'
         }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <span style={{ fontSize: '0.8rem', color: '#1A56DB', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <span style={{ fontSize: '0.8rem', color: '#040070', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Akademi Kadromuz
             </span>
             <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0A1E3F', marginTop: '0.3rem' }}>
@@ -157,11 +157,11 @@ export default function Academy({ t }) {
                 gap: '6px'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <UserCheck size={18} color="#1A56DB" />
+                  <UserCheck size={18} color="#040070" />
                   <span style={{ fontWeight: 800, color: '#0A1E3F', fontSize: '1rem' }}>{inst.name}</span>
                 </div>
                 <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}>{inst.title}</div>
-                <div style={{ fontSize: '0.75rem', color: '#1A56DB', fontWeight: 700, marginTop: '4px' }}>
+                <div style={{ fontSize: '0.75rem', color: '#040070', fontWeight: 700, marginTop: '4px' }}>
                   Eğitim: {inst.field}
                 </div>
               </div>
@@ -224,7 +224,7 @@ export default function Academy({ t }) {
               </div>
             ) : (
               <div>
-                <span style={{ fontSize: '0.8rem', color: '#1A56DB', fontWeight: 700, textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.8rem', color: '#040070', fontWeight: 700, textTransform: 'uppercase' }}>
                   TSigN Akademi Ön Kayıt
                 </span>
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0A1E3F', marginTop: '0.3rem', marginBottom: '1.5rem' }}>

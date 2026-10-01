@@ -8,7 +8,7 @@ export default function Footer({ t, onOpenQuote }) {
   };
 
   return (
-    <footer style={{
+    <footer id="footer" style={{
       backgroundColor: '#07152B',
       color: '#FFFFFF',
       position: 'relative',

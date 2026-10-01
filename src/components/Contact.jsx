@@ -66,11 +66,11 @@ export default function Contact({ t }) {
                   width: '44px',
                   height: '44px',
                   borderRadius: '12px',
-                  backgroundColor: 'rgba(26, 86, 219, 0.1)',
+                  backgroundColor: 'rgba(4, 0, 112, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#1A56DB',
+                  color: '#040070',
                   flexShrink: 0
                 }}>
                   <MapPin size={22} />
@@ -100,11 +100,11 @@ export default function Contact({ t }) {
                     width: '40px',
                     height: '40px',
                     borderRadius: '10px',
-                    backgroundColor: 'rgba(26, 86, 219, 0.1)',
+                    backgroundColor: 'rgba(4, 0, 112, 0.1)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#1A56DB'
+                    color: '#040070'
                   }}>
                     <Mail size={18} />
                   </div>
@@ -129,11 +129,11 @@ export default function Contact({ t }) {
                     width: '40px',
                     height: '40px',
                     borderRadius: '10px',
-                    backgroundColor: 'rgba(26, 86, 219, 0.1)',
+                    backgroundColor: 'rgba(4, 0, 112, 0.1)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#1A56DB'
+                    color: '#040070'
                   }}>
                     <Clock size={18} />
                   </div>

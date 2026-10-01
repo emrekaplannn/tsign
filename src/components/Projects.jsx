@@ -147,12 +147,12 @@ export default function Projects({ t, onOpenQuote }) {
                     marginBottom: '0.75rem'
                   }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <MapPin size={13} color="#1A56DB" />
+                      <MapPin size={13} color="#040070" />
                       {project.location}
                     </span>
                     <span>•</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Calendar size={13} color="#1A56DB" />
+                      <Calendar size={13} color="#040070" />
                       {project.year}
                     </span>
                   </div>
@@ -186,7 +186,7 @@ export default function Projects({ t, onOpenQuote }) {
                     justifyContent: 'space-between',
                     paddingTop: '1rem',
                     borderTop: '1px solid #F1F5F9',
-                    color: '#1A56DB',
+                    color: '#040070',
                     fontWeight: 700,
                     fontSize: '0.875rem',
                     cursor: 'pointer'
@@ -246,7 +246,7 @@ export default function Projects({ t, onOpenQuote }) {
               <X size={20} />
             </button>
 
-            <span style={{ fontSize: '0.8rem', color: '#1A56DB', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.8rem', color: '#040070', fontWeight: 700, textTransform: 'uppercase' }}>
               {selectedProject.category}
             </span>
             <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0A1E3F', marginTop: '0.3rem', marginBottom: '1rem' }}>
@@ -287,7 +287,7 @@ export default function Projects({ t, onOpenQuote }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
               {selectedProject.features.map((feat, fIdx) => (
                 <div key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <CheckCircle2 size={16} color="#1A56DB" />
+                  <CheckCircle2 size={16} color="#040070" />
                   <span style={{ fontSize: '0.95rem', color: '#334155' }}>{feat}</span>
                 </div>
               ))}

@@ -4,16 +4,16 @@ import Logo from './Logo';
 
 export default function WhyUs({ t }) {
   const iconList = [
-    <Layers size={24} color="#1A56DB" />,
-    <ShieldCheck size={24} color="#1A56DB" />,
-    <TrendingUp size={24} color="#1A56DB" />,
+    <Layers size={24} color="#040070" />,
+    <ShieldCheck size={24} color="#040070" />,
+    <TrendingUp size={24} color="#040070" />,
   ];
 
   const statIcons = [
-    <Building size={28} color="#1A56DB" />,
-    <Users size={28} color="#1A56DB" />,
-    <Clock size={28} color="#1A56DB" />,
-    <Award size={28} color="#1A56DB" />,
+    <Building size={28} color="#040070" />,
+    <Users size={28} color="#040070" />,
+    <Clock size={28} color="#040070" />,
+    <Award size={28} color="#040070" />,
   ];
 
   return (
@@ -62,7 +62,7 @@ export default function WhyUs({ t }) {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateX(6px)';
-                  e.currentTarget.style.borderColor = '#1A56DB';
+                  e.currentTarget.style.borderColor = '#040070';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateX(0)';
@@ -155,16 +155,16 @@ export default function WhyUs({ t }) {
 
             {/* Motivational Quote with TSigN Droplet Motif */}
             <div style={{
-              backgroundColor: 'rgba(26, 86, 219, 0.04)',
+              backgroundColor: 'rgba(4, 0, 112, 0.04)',
               borderRadius: '16px',
               padding: '1.8rem',
-              border: '1px solid rgba(26, 86, 219, 0.15)',
+              border: '1px solid rgba(4, 0, 112, 0.15)',
               display: 'flex',
               alignItems: 'center',
               gap: '1rem',
               position: 'relative'
             }}>
-              <Quote size={28} color="#1A56DB" style={{ flexShrink: 0, opacity: 0.6 }} />
+              <Quote size={28} color="#040070" style={{ flexShrink: 0, opacity: 0.6 }} />
               <p style={{
                 fontSize: '1rem',
                 fontWeight: 600,
@@ -182,7 +182,7 @@ export default function WhyUs({ t }) {
                     width: '42px',
                     height: '42px',
                     objectFit: 'contain',
-                    filter: 'drop-shadow(0 4px 10px rgba(26, 86, 219, 0.4))'
+                    filter: 'drop-shadow(0 4px 10px rgba(4, 0, 112, 0.4))'
                   }}
                 />
               </div>

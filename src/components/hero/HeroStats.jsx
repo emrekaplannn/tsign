@@ -36,11 +36,11 @@ export default function HeroStats({ stats = [] }) {
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                backgroundColor: 'rgba(26, 86, 219, 0.1)',
+                backgroundColor: 'rgba(4, 0, 112, 0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#1A56DB',
+                color: '#040070ff',
                 flexShrink: 0
               }}
             >

@@ -31,8 +31,6 @@ export const tsignData = {
     services: {
       tag: "Hizmetler",
       title: "Multidisipliner Çözümlerimiz",
-      subtitle:
-        "Mimarlıktan statik analize, MEP koordinasyonundan yazılım çözümlerine kadar bütünleşik mühendislik hizmetleri.",
       items: [
         {
           id: "mimari",

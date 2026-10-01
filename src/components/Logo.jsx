@@ -70,7 +70,7 @@ export default function Logo({
                 fontFamily: 'var(--font-heading)'
               }}
             >
-              TS<span style={{ color: '#1A56DB' }}>ig</span>N
+              TS<span style={{ color: '#040070ff' }}>ig</span>N
             </span>
           </div>
           <span

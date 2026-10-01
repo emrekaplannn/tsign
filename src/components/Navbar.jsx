@@ -143,18 +143,18 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
                 style={{
                   fontSize: '0.825rem',
                   fontWeight: isActive ? 700 : 600,
-                  color: isActive ? '#1A56DB' : '#475569',
+                  color: isActive ? '#040070ff' : '#475569',
                   backgroundColor: isActive ? '#FFFFFF' : 'transparent',
                   padding: '0.42rem 0.85rem',
                   borderRadius: '9999px',
                   textDecoration: 'none',
                   whiteSpace: 'nowrap',
-                  boxShadow: isActive ? '0 2px 8px rgba(26, 86, 219, 0.12)' : 'none',
+                  boxShadow: isActive ? '0 2px 8px rgba(4, 0, 112, 0.16)' : 'none',
                   transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.color = '#1A56DB';
+                    e.currentTarget.style.color = '#040070ff';
                     e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.75)';
                   }
                 }}
@@ -184,7 +184,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
               borderRadius: '9999px',
               border: '1px solid #E2E8F0',
               backgroundColor: '#FFFFFF',
-              color: '#0A1E3F',
+              color: '#040070ff',
               fontSize: '0.8rem',
               fontWeight: 700,
               cursor: 'pointer',
@@ -192,16 +192,16 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
               transition: 'all 0.2s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#1A56DB';
-              e.currentTarget.style.color = '#1A56DB';
+              e.currentTarget.style.borderColor = '#040070ff';
+              e.currentTarget.style.color = '#040070ff';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = '#E2E8F0';
-              e.currentTarget.style.color = '#0A1E3F';
+              e.currentTarget.style.color = '#040070ff';
             }}
             title={lang === 'tr' ? "Switch to English" : "Türkçe'ye Geç"}
           >
-            <Globe size={14} color="#1A56DB" />
+            <Globe size={14} color="#040070ff" />
             <span>{lang.toUpperCase()}</span>
           </button>
 
@@ -216,21 +216,21 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
               padding: scrolled ? '0.55rem 1.35rem' : '0.62rem 1.5rem',
               borderRadius: '9999px',
               border: 'none',
-              background: 'linear-gradient(135deg, #1A56DB 0%, #0284C7 100%)',
+              background: 'linear-gradient(135deg, #040070ff 0%, #0041d7ff 100%)',
               color: '#FFFFFF',
               fontSize: '0.875rem',
               fontWeight: 700,
               cursor: 'pointer',
-              boxShadow: '0 6px 18px rgba(26, 86, 219, 0.28)',
+              boxShadow: '0 6px 18px rgba(4, 0, 112, 0.35)',
               transition: 'all 0.25s ease'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(26, 86, 219, 0.4)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(4, 0, 112, 0.45)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 86, 219, 0.28)';
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(4, 0, 112, 0.35)';
             }}
           >
             <span>{t.nav.getQuote}</span>
@@ -292,8 +292,8 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
                 style={{
                   fontSize: '0.95rem',
                   fontWeight: isActive ? 700 : 600,
-                  color: isActive ? '#1A56DB' : '#1E293B',
-                  backgroundColor: isActive ? 'rgba(26, 86, 219, 0.08)' : 'transparent',
+                  color: isActive ? '#040070ff' : '#1E293B',
+                  backgroundColor: isActive ? 'rgba(4, 0, 112, 0.08)' : 'transparent',
                   padding: '0.7rem 1rem',
                   borderRadius: '12px',
                   textDecoration: 'none',
@@ -304,7 +304,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
                 }}
               >
                 <span>{item.label}</span>
-                {isActive && <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#1A56DB' }} />}
+                {isActive && <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#040070ff' }} />}
               </a>
             );
           })}
@@ -324,12 +324,12 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
                 padding: '0.85rem 1.5rem',
                 borderRadius: '14px',
                 border: 'none',
-                background: 'linear-gradient(135deg, #1A56DB 0%, #0284C7 100%)',
+                background: 'linear-gradient(135deg, #040070ff 0%, #0041d7ff 100%)',
                 color: '#FFFFFF',
                 fontSize: '0.95rem',
                 fontWeight: 700,
                 cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(26, 86, 219, 0.3)'
+                boxShadow: '0 4px 14px rgba(4, 0, 112, 0.35)'
               }}
             >
               <span>{t.nav.getQuote}</span>

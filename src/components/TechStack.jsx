@@ -98,10 +98,10 @@ export default function TechStack({ t }) {
                   fontWeight: 600,
                   cursor: 'pointer',
                   transition: 'all 0.25s ease',
-                  backgroundColor: isActive ? '#1A56DB' : 'rgba(255, 255, 255, 0.06)',
+                  backgroundColor: isActive ? '#040070' : 'rgba(255, 255, 255, 0.06)',
                   color: isActive ? '#FFFFFF' : '#CBD5E1',
-                  border: isActive ? '1px solid #38BDF8' : '1px solid rgba(255, 255, 255, 0.12)',
-                  boxShadow: isActive ? '0 0 20px rgba(26, 86, 219, 0.4)' : 'none'
+                  border: isActive ? '1px solid #0041d7' : '1px solid rgba(255, 255, 255, 0.12)',
+                  boxShadow: isActive ? '0 0 20px rgba(4, 0, 112, 0.4)' : 'none'
                 }}
               >
                 {cat.name}
