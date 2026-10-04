@@ -9,7 +9,7 @@ export default function Academy({ t }) {
     { name: "Serhat Tuncer", title: "İnşaat Mühendisi - ODTÜ İnşaat Mühendisliği", field: "SAP2000 & Yapı Analizi" },
     { name: "Merve Öztürk", title: "Kıdemli Mimar - ODTÜ Mimarlık", field: "Revit BIM & Navisworks" },
     { name: "Emre Kaplan", title: "Bilgisayar Mühendisi - ODTÜ Bilgisayar Mühendisliği", field: "Python & Yazılım Entegrasyonu" },
-    { name: "Vedat Genç", title: "İç Mimar - Dicle Üniversitesi", field: "3ds Max & V-Ray Görselleştirme" },
+    { name: "Malik Ciddi", title: "Makine Mühendisi", field: "MEP & Mekanik Tesisat Koordinasyonu" },
     { name: "Jinda Aslanhan", title: "Kıdemli Mimar - Hasan Kalyoncu Üniversitesi", field: "Proje Yönetimi & Mimari Tasarım" },
   ];
 

@@ -377,11 +377,11 @@ export const tsignData = {
           icon: "code",
         },
         {
-          name: "Vedat Genç",
-          role: "İç Mimar",
-          school: "Dicle Üniversitesi İç Mimarlık",
-          bio: "Fonksiyonel ve estetik iç mekan planlaması, FF&E koordinasyonu ve yüksek detaylı uygulama projeleri tasarımcısı.",
-          icon: "layout",
+          name: "Malik Ciddi",
+          role: "Makine Mühendisi",
+          school: "Makine Mühendisliği",
+          bio: "Mekanik tesisat sistemleri, HVAC tasarımı, enerji verimliliği ve BIM tabanlı MEP koordinasyonu uzmanı.",
+          icon: "compass",
         },
         {
           name: "Jinda Aslanhan",
@@ -806,11 +806,11 @@ export const tsignData = {
           icon: "code",
         },
         {
-          name: "Vedat Genç",
-          role: "Interior Architect",
-          school: "Dicle University Interior Architecture",
-          bio: "Specializing in high-end spatial flow, FF&E specifications, and bespoke interior detailing.",
-          icon: "layout",
+          name: "Malik Ciddi",
+          role: "Mechanical Engineer",
+          school: "Mechanical Engineering",
+          bio: "Specializing in mechanical installation systems, HVAC design, energy modeling, and BIM-based MEP coordination.",
+          icon: "compass",
         },
         {
           name: "Jinda Aslanhan",

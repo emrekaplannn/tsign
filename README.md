@@ -145,7 +145,7 @@ npm run preview
 * **Onur Tuncer** — İnşaat Mühendisi
 * **Merve Öztürk** — BIM Yöneticisi & Kıdemli Mimar *(ODTÜ Mimarlık)*
 * **Emre Kaplan** — Yazılım & Bilir Kişi *(ODTÜ Bilgisayar)*
-* **Vedat Genç** — İç Mimar *(Dicle Üniversitesi)*
+* **Malik Ciddi** — Makine Mühendisi
 * **Jinda Aslanhan** — Kıdemli Mimar *(Hasan Kalyoncu Üniversitesi)*
 
 ---
