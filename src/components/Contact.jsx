@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Briefcase, ArrowRight } from 'lucide-react';
 
-export default function Contact({ t }) {
+export default function Contact({ t, onOpenCareers }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,7 +29,8 @@ export default function Contact({ t }) {
   return (
     <section id="contact" className="section" style={{
       backgroundColor: '#FFFFFF',
-      position: 'relative'
+      position: 'relative',
+      paddingTop: '2.5rem'
     }}>
       <div className="container">
         {/* Section Header */}
@@ -49,9 +50,122 @@ export default function Contact({ t }) {
           gap: '3rem',
           alignItems: 'flex-start'
         }}>
-          {/* Left Column: Office Details & Map */}
+          {/* Left Column: Careers Banner, Map & Office Details */}
           <div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2rem' }}>
+            {/* Careers Referral Banner (Opens Careers Modal) */}
+            <div
+              onClick={onOpenCareers}
+              style={{
+                background: 'linear-gradient(135deg, #0A1E3F 0%, #163674 100%)',
+                borderRadius: '20px',
+                padding: '1.25rem 1.4rem',
+                marginBottom: '1.25rem',
+                color: '#FFFFFF',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                boxShadow: '0 8px 22px rgba(10, 30, 63, 0.12)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                transition: 'all 0.25s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 12px 28px rgba(10, 30, 63, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 22px rgba(10, 30, 63, 0.12)';
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                  border: '1px solid rgba(56, 189, 248, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#38BDF8',
+                  flexShrink: 0
+                }}>
+                  <Briefcase size={20} />
+                </div>
+                <div>
+                  <div style={{
+                    fontSize: '0.725rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.06em',
+                    color: '#38BDF8',
+                    marginBottom: '2px'
+                  }}>
+                    Kariyer & Staj Fırsatları
+                  </div>
+                  <h4 style={{
+                    fontSize: '1rem',
+                    fontWeight: 800,
+                    color: '#FFFFFF',
+                    margin: 0,
+                    lineHeight: 1.25
+                  }}>
+                    TSigN Ailesine Katılın
+                  </h4>
+                  <p style={{
+                    fontSize: '0.8rem',
+                    color: '#CBD5E1',
+                    margin: '2px 0 0 0',
+                    lineHeight: 1.35
+                  }}>
+                    Açık pozisyonları ve staj programlarını inceleyin
+                  </p>
+                </div>
+              </div>
+
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                padding: '0.5rem 0.9rem',
+                borderRadius: '10px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                flexShrink: 0,
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <span>İncele</span>
+                <ArrowRight size={13} />
+              </div>
+            </div>
+
+            {/* Embedded Google Map (YDA Center Ankara - Söğütözü) */}
+            <div style={{
+              borderRadius: '20px',
+              overflow: 'hidden',
+              border: '1px solid #E2E8F0',
+              boxShadow: '0 4px 15px rgba(10, 30, 63, 0.06)',
+              height: '240px',
+              backgroundColor: '#EDF2F7',
+              marginBottom: '1.25rem'
+            }}>
+              <iframe
+                title="TSigN YDA Center Konumu"
+                src="https://maps.google.com/maps?q=YDA%20Center%20%C3%87ankaya%20Ankara&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+              />
+            </div>
+
+            {/* 3 Contact Info Cards: Address, Email, Working Hours */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {/* Address Card */}
               <div style={{
                 backgroundColor: '#F8FAFC',
@@ -145,26 +259,6 @@ export default function Contact({ t }) {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Embedded Google Map (YDA Center Ankara - Söğütözü) */}
-            <div style={{
-              borderRadius: '20px',
-              overflow: 'hidden',
-              border: '1px solid #E2E8F0',
-              boxShadow: '0 4px 15px rgba(10, 30, 63, 0.06)',
-              height: '240px',
-              backgroundColor: '#EDF2F7'
-            }}>
-              <iframe
-                title="TSigN YDA Center Konumu"
-                src="https://maps.google.com/maps?q=YDA%20Center%20%C3%87ankaya%20Ankara&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-              />
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, CheckCircle2, ArrowRight } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight, Briefcase, ArrowUpRight } from 'lucide-react';
 import { getServiceIcon } from './ServiceIcons';
 
 /**
@@ -7,7 +7,7 @@ import { getServiceIcon } from './ServiceIcons';
  *
  * Detailed breakdown popup dialog for the selected engineering service.
  */
-export default function ServiceModal({ service, onClose, onOpenQuote }) {
+export default function ServiceModal({ service, onClose, onOpenQuote, navigate }) {
   if (!service) return null;
 
   return (
@@ -38,37 +38,92 @@ export default function ServiceModal({ service, onClose, onOpenQuote }) {
           boxShadow: '0 25px 60px rgba(0, 0, 0, 0.3)'
         }}
       >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
+        {/* Top Right Actions: Close Button & Portföyümüz Link */}
+        <div
           style={{
             position: 'absolute',
-            top: '1.5rem',
-            right: '1.5rem',
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            backgroundColor: '#F1F5F9',
+            top: '1.35rem',
+            right: '1.35rem',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#64748B',
-            cursor: 'pointer',
-            border: 'none',
-            transition: 'all 0.2s'
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            gap: '0.6rem',
+            zIndex: 10
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#E2E8F0';
-            e.currentTarget.style.color = '#0F172A';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#F1F5F9';
-            e.currentTarget.style.color = '#64748B';
-          }}
-          aria-label="Kapat"
         >
-          <X size={20} />
-        </button>
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            style={{
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              backgroundColor: '#F1F5F9',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#64748B',
+              cursor: 'pointer',
+              border: 'none',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#E2E8F0';
+              e.currentTarget.style.color = '#0F172A';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#F1F5F9';
+              e.currentTarget.style.color = '#64748B';
+            }}
+            aria-label="Kapat"
+          >
+            <X size={18} />
+          </button>
+
+          {/* Portföyümüz Redirect Button */}
+          <button
+            onClick={() => {
+              onClose();
+              if (navigate) {
+                navigate('/portfoyumuz');
+              } else {
+                window.location.href = '/portfoyumuz';
+              }
+            }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '0.42rem 0.85rem',
+              borderRadius: '9999px',
+              backgroundColor: 'rgba(4, 0, 112, 0.06)',
+              color: '#040070',
+              border: '1px solid rgba(4, 0, 112, 0.16)',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(4, 0, 112, 0.05)',
+              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#040070';
+              e.currentTarget.style.color = '#FFFFFF';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(4, 0, 112, 0.25)';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(4, 0, 112, 0.06)';
+              e.currentTarget.style.color = '#040070';
+              e.currentTarget.style.boxShadow = '0 2px 6px rgba(4, 0, 112, 0.05)';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+            title="İlgili Projeleri Portföyümüzde İnceleyin"
+          >
+            <Briefcase size={13} />
+            <span>Portföyümüz</span>
+            <ArrowUpRight size={13} />
+          </button>
+        </div>
 
         {/* Modal Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '1.2rem' }}>

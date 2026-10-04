@@ -34,6 +34,8 @@ export default function Logo({
         gap: isSmall ? '10px' : isLarge ? '14px' : '12px',
         textDecoration: 'none',
         userSelect: 'none',
+        background: 'transparent',
+        backgroundColor: 'transparent',
         ...style
       }}
     >
@@ -43,11 +45,15 @@ export default function Logo({
         alt="TSigN Design & BIM Solutions Logo"
         style={{
           height: logoHeight,
+          maxHeight: '100%',
           width: 'auto',
           objectFit: 'contain',
+          display: 'block',
+          background: 'transparent',
+          backgroundColor: 'transparent',
           filter: dark
             ? 'brightness(1.1) drop-shadow(0 4px 12px rgba(26, 86, 219, 0.4))'
-            : 'drop-shadow(0 4px 12px rgba(10, 30, 63, 0.12))',
+            : 'none',
           transition: 'transform 0.25s ease'
         }}
       />

@@ -12,7 +12,7 @@ import React, { useState, useEffect, useRef } from 'react';
  *  - 0.7x playback speed for ultra-smooth cinematic motion
  *  - 0.8 base opacity
  *  - Linear, tight edge transparency (45px flat fade on left and top)
- *  - Automatically fades to full transparency when entering "Teknolojik Altyapımız & BIM Ekosistemi" (#tech)
+ *  - Automatically fades to full transparency when inside Hero (#home), "Teknolojik Altyapımız & BIM Ekosistemi" (#tech), and Footer (#footer)
  */
 export default function SideVideo() {
   const videoRef = useRef(null);
@@ -26,43 +26,36 @@ export default function SideVideo() {
   }, []);
 
   // Kademeli (progressive) saydamlık kontrolü:
-  // Teknolojik Altyapı (#tech) bölümüne yaklaşırken adım adım saydamlaşır (fade out),
-  // bölümden uzaklaşırken adım adım tekrar opaklaşır (fade in).
+  // - Hero (#home): Sayfa başında video gizlidir (opacity: 0), Services'e geçerken kademeli belirir (fade in).
+  // - Teknolojik Altyapı (#tech): Yaklaşırken kademeli kaybolur (fade out), uzaklaşırken tekrar belirir (fade in).
+  // - Footer (#footer): Yaklaşırken kademeli kaybolur (fade out).
   useEffect(() => {
     let ticking = false;
 
     const updateOpacity = () => {
-      const tech = document.getElementById('tech');
-      if (!tech || !containerRef.current) return;
+      if (!containerRef.current) return;
 
-      const rect = tech.getBoundingClientRect();
       const vh = window.innerHeight;
 
-      // 1. Teknolojik Altyapı (#tech) bölümü kademeli geçişi:
-      const topLeadIn = 150;
-      const topLeadOut = 120;
-      const topSpan = topLeadIn + topLeadOut; // 270px
+      // 1. Hero (#home) bölümü kademeli geçişi (Hero bölümünde gizli, aşağı indikçe yumuşakça belirir):
+      let heroOpacity = 1;
+      const hero = document.getElementById('home') || document.querySelector('.hero-section');
+      if (hero) {
+        const hRect = hero.getBoundingClientRect();
+        const heroThresholdStart = 320;
+        const heroThresholdEnd = 60;
+        const heroSpan = heroThresholdStart - heroThresholdEnd; // 260px
 
-      const bottomStart = vh - 80;
-      const bottomSpan = 260;
-
-      let techOpacity = 1;
-
-      if (rect.top >= vh + topLeadIn) {
-        techOpacity = 1;
-      } else if (rect.top > vh - topLeadOut) {
-        const progress = (vh + topLeadIn - rect.top) / topSpan;
-        techOpacity = 1 - progress;
-      } else if (rect.bottom >= bottomStart) {
-        techOpacity = 0;
-      } else if (rect.bottom > bottomStart - bottomSpan) {
-        const progress = (bottomStart - rect.bottom) / bottomSpan;
-        techOpacity = progress;
-      } else {
-        techOpacity = 1;
+        if (hRect.bottom >= heroThresholdStart) {
+          heroOpacity = 0;
+        } else if (hRect.bottom > heroThresholdEnd) {
+          heroOpacity = (heroThresholdStart - hRect.bottom) / heroSpan;
+        } else {
+          heroOpacity = 1;
+        }
       }
 
-      // 2. Footer bölümü kademeli geçişi (Footer'a yaklaşırken aynı pürüzsüzlükle kaybolur):
+      // 2. Footer bölümü kademeli geçişi (Footer'a yaklaşırken pürüzsüzce kaybolur):
       let footerOpacity = 1;
       const footer = document.getElementById('footer') || document.querySelector('footer');
       if (footer) {
@@ -81,8 +74,8 @@ export default function SideVideo() {
         }
       }
 
-      // Her iki bölgenin geçişini birleştir
-      const rawOpacity = Math.min(techOpacity, footerOpacity);
+      // Geçişleri birleştir (Hero ve Footer)
+      const rawOpacity = Math.min(heroOpacity, footerOpacity);
 
       // Yumuşak cosine easing eğrisi (başlangıç ve bitişte ekstra ipeksi geçiş)
       const easedOpacity = rawOpacity > 0 && rawOpacity < 1
@@ -128,9 +121,9 @@ export default function SideVideo() {
         style={{
           position: 'fixed',
           right: 0,
-          bottom: '0rem',
-          width: 'clamp(300px, 26vw, 440px)',
-          height: 'clamp(640px, 96vh, 1080px)',
+          bottom: 0,
+          width: 'clamp(180px, 15.6vw, 264px)',
+          height: 'clamp(384px, 57.6vh, 648px)',
           pointerEvents: 'none',
           userSelect: 'none',
           zIndex: 2,
@@ -138,12 +131,16 @@ export default function SideVideo() {
           border: 'none',
           boxShadow: 'none',
           overflow: 'hidden',
-          willChange: 'opacity'
+          willChange: 'opacity',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-end'
         }}
       >
         <video
           ref={videoRef}
-          src="/side_video.mp4"
+          src="/side_video2.mp4"
           autoPlay
           loop
           muted
@@ -158,7 +155,8 @@ export default function SideVideo() {
             opacity: 0.8,
             border: 'none',
             boxShadow: 'none',
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            marginLeft: 'auto'
           }}
         />
       </div>

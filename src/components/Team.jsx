@@ -14,7 +14,9 @@ export default function Team({ t }) {
   return (
     <section id="team" className="section" style={{
       backgroundColor: '#F8F9FA',
-      position: 'relative'
+      position: 'relative',
+      paddingTop: '2.5rem',
+      paddingBottom: '3.5rem'
     }}>
       <div className="container">
         {/* Section Header */}

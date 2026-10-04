@@ -25,7 +25,9 @@ export default function Academy({ t }) {
   return (
     <section id="academy" className="section" style={{
       backgroundColor: '#FFFFFF',
-      position: 'relative'
+      position: 'relative',
+      paddingTop: '2.5rem',
+      paddingBottom: '3.5rem'
     }}>
       <div className="container">
         {/* Section Header */}

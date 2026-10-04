@@ -5,7 +5,7 @@ export const tsignData = {
     nav: {
       home: "Ana Sayfa",
       about: "Hakkımızda",
-      services: "Hizmet Alanları",
+      services: "Hizmetler",
       projects: "Projeler",
       tech: "Teknoloji",
       team: "Ekibimiz",
@@ -21,7 +21,7 @@ export const tsignData = {
       description:
         "Sürdürülebilir ve değer üreten projeler geliştiriyoruz. BIM odaklı yaklaşımımızla, tasarımdan işletmeye uzanan tüm süreçlerde verimlilik ve kalite sağlıyoruz.",
       ctaPrimary: "Hizmetlerimizi Keşfedin",
-      ctaSecondary: "Bize Ulaşın",
+      ctaSecondary: "Neden TSigN",
       stats: [
         { label: "BIM Seviyesi", value: "LOD 500" },
         { label: "Sıfır Çakışma", value: "%100 MEP" },
@@ -500,7 +500,7 @@ export const tsignData = {
       description:
         "Developing sustainable and value-creating projects. With our BIM-driven approach, we deliver efficiency and unmatched quality from design to operation.",
       ctaPrimary: "Explore Services",
-      ctaSecondary: "Contact Us",
+      ctaSecondary: "Why TSigN",
       stats: [
         { label: "BIM Level", value: "LOD 500" },
         { label: "Clash Free", value: "100% MEP" },

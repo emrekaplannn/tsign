@@ -25,6 +25,7 @@ import HeroStats from './hero/HeroStats';
 export default function Hero({
   t,
   onOpenQuote,
+  onOpenWhyUs,
   customContent = {},
   customVisual = {},
   customBackground = {},
@@ -72,8 +73,12 @@ export default function Hero({
             description={heroData.description}
             ctaPrimaryText={heroData.ctaPrimary}
             ctaPrimaryHref="#services"
-            ctaSecondaryText={heroData.ctaSecondary}
-            ctaSecondaryHref="#contact"
+            ctaSecondaryText={heroData.ctaSecondary || "Neden TSigN"}
+            ctaSecondaryHref="#whyUs"
+            onCtaSecondaryClick={(e) => {
+              e.preventDefault();
+              if (onOpenWhyUs) onOpenWhyUs();
+            }}
             stats={heroData.stats || []}
             {...customContent}
           />

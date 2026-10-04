@@ -1,29 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
-import { Menu, X, Globe, ArrowRight, Sparkles } from 'lucide-react';
+import { Menu, X, Globe, ArrowRight } from 'lucide-react';
 
 /**
  * Navbar Component
- * Modern, floating (yüzen) glassmorphism header designed for professional usability.
- * Features an isolated high-res emblem, interactive navigation pills, language toggler,
- * and high-converting CTA.
+ * Modern, floating glassmorphism header.
+ * Displays: Logo - Hizmetler - Projeler - Ekibimiz - TSgiN Akademi - İletişim - Dil Seçimi - Teklif Alın
  */
-export default function Navbar({ lang, setLang, t, onOpenQuote }) {
+export default function Navbar({ lang, setLang, t, onOpenQuote, currentPath = '/', navigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState('#home');
+  const [activeHash, setActiveHash] = useState('');
+
+  const isPortfolioPage = currentPath === '/portfoyumuz' || currentPath === '/portfoyumuz/';
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 25);
 
+      if (isPortfolioPage) return;
+
+      if (window.scrollY < 200) {
+        setActiveHash('');
+        return;
+      }
+
       // Determine active section based on scroll position
-      const sections = ['#home', '#services', '#tech', '#whyUs', '#projects', '#team', '#academy', '#careers', '#contact'];
+      const sections = ['#services', '#team', '#academy', '#contact'];
       for (const sectionId of sections) {
         const el = document.querySelector(sectionId);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 140 && rect.bottom >= 140) {
+          if (rect.top <= 160 && rect.bottom >= 160) {
             setActiveHash(sectionId);
             break;
           }
@@ -33,31 +41,56 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isPortfolioPage]);
 
   const navLinks = [
-    { href: '#home', label: t.nav.home },
-    { href: '#services', label: t.nav.services },
-    { href: '#tech', label: t.nav.tech },
-    { href: '#whyUs', label: t.whyUs.tag || 'Neden Biz?' },
-    { href: '#projects', label: t.nav.projects },
-    { href: '#team', label: t.nav.team },
-    { href: '#academy', label: t.nav.academy },
-    { href: '#careers', label: t.nav.careers },
-    { href: '#contact', label: t.nav.contact },
+    { href: '#services', label: t.nav.services, isRoute: false },
+    { href: '/portfoyumuz', label: t.nav.projects, isRoute: true },
+    { href: '#team', label: t.nav.team, isRoute: false },
+    { href: '#academy', label: t.nav.academy, isRoute: false },
+    { href: '#contact', label: t.nav.contact, isRoute: false },
   ];
 
-  const handleLinkClick = (e, href) => {
+  const handleLinkClick = (e, item) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    setActiveHash(href);
-    const target = document.querySelector(href);
+
+    if (item.isRoute) {
+      if (isPortfolioPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        if (navigate) navigate('/portfoyumuz');
+        else window.location.href = '/portfoyumuz';
+      }
+      return;
+    }
+
+    if (isPortfolioPage) {
+      if (navigate) navigate('/', item.href);
+      else window.location.href = '/' + item.href;
+      return;
+    }
+
+    setActiveHash(item.href);
+    const target = document.querySelector(item.href);
     if (target) {
       const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 95;
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    if (isPortfolioPage) {
+      if (navigate) navigate('/');
+      else window.location.href = '/';
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveHash('');
     }
   };
 
@@ -72,7 +105,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
         display: 'flex',
         justifyContent: 'center',
         padding: '0 1rem',
-        pointerEvents: 'none', // Allows clicking background outside floating pill
+        pointerEvents: 'none',
         transition: 'top 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
     >
@@ -81,33 +114,38 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
         style={{
           pointerEvents: 'auto',
           width: '100%',
-          maxWidth: '1240px',
+          maxWidth: '840px',
+          height: scrolled ? '54px' : '62px',
           borderRadius: '9999px',
           background: scrolled
-            ? 'rgba(255, 255, 255, 0.94)'
-            : 'rgba(255, 255, 255, 0.86)',
+            ? 'rgba(255, 255, 255, 0.95)'
+            : 'rgba(255, 255, 255, 0.88)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          border: '1px solid rgba(255, 255, 255, 0.85)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
           boxShadow: scrolled
-            ? '0 18px 40px -12px rgba(10, 30, 63, 0.16), 0 0 0 1px rgba(226, 232, 240, 0.85)'
-            : '0 12px 32px -10px rgba(10, 30, 63, 0.1), 0 0 0 1px rgba(226, 232, 240, 0.6)',
-          padding: scrolled ? '0.55rem 1.25rem' : '0.7rem 1.6rem',
+            ? '0 14px 32px -10px rgba(10, 30, 63, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.8)'
+            : '0 8px 24px -6px rgba(10, 30, 63, 0.07), 0 0 0 1px rgba(226, 232, 240, 0.55)',
+          padding: scrolled ? '0 1.15rem 0 0.85rem' : '0 1.25rem 0 0.95rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        {/* Left Side: Prominent Standalone TSigN Emblem (No Text) */}
+        {/* Left Side: Standalone TSigN Emblem */}
         <a
-          href="#home"
-          onClick={(e) => handleLinkClick(e, '#home')}
+          href="/"
+          onClick={handleLogoClick}
           style={{
             display: 'flex',
             alignItems: 'center',
+            height: '100%',
+            alignSelf: 'stretch',
             textDecoration: 'none',
-            paddingRight: '0.75rem',
+            background: 'transparent',
+            backgroundColor: 'transparent',
+            paddingRight: '0.4rem',
             transition: 'transform 0.25s ease'
           }}
           className="brand-logo-link"
@@ -116,46 +154,48 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
           <Logo
             showText={false}
             size="large"
-            height={scrolled ? '55px' : '72px'}
+            height={scrolled ? '54px' : '62px'}
+            style={{
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              background: 'transparent',
+              backgroundColor: 'transparent'
+            }}
           />
         </a>
 
-        {/* Center: Desktop Navigation Links (Pill Style) */}
+        {/* Center: Desktop Navigation Links (Clean & Seamless Typography) */}
         <nav
           className="desktop-nav-menu"
           style={{
             display: 'none',
             alignItems: 'center',
-            gap: '0.25rem',
-            backgroundColor: 'rgba(241, 245, 249, 0.65)',
-            padding: '0.3rem 0.45rem',
-            borderRadius: '9999px',
-            border: '1px solid rgba(226, 232, 240, 0.7)'
+            gap: '0.85rem'
           }}
         >
           {navLinks.map((item, index) => {
-            const isActive = activeHash === item.href;
+            const isActive = isPortfolioPage ? item.isRoute : activeHash === item.href;
             return (
               <a
                 key={index}
                 href={item.href}
-                onClick={(e) => handleLinkClick(e, item.href)}
+                onClick={(e) => handleLinkClick(e, item)}
                 style={{
-                  fontSize: '0.825rem',
-                  fontWeight: isActive ? 700 : 600,
+                  fontSize: '0.88rem',
+                  fontWeight: isActive ? 700 : 500,
                   color: isActive ? '#040070ff' : '#475569',
-                  backgroundColor: isActive ? '#FFFFFF' : 'transparent',
-                  padding: '0.42rem 0.85rem',
-                  borderRadius: '9999px',
                   textDecoration: 'none',
+                  padding: '0.35rem 0.55rem',
+                  borderRadius: '8px',
+                  position: 'relative',
                   whiteSpace: 'nowrap',
-                  boxShadow: isActive ? '0 2px 8px rgba(4, 0, 112, 0.16)' : 'none',
-                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+                  transition: 'all 0.2s ease'
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.color = '#040070ff';
-                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.75)';
+                    e.currentTarget.style.backgroundColor = 'rgba(4, 0, 112, 0.04)';
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -166,29 +206,43 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
                 }}
               >
                 {item.label}
+                {isActive && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: '-2px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '18px',
+                      height: '2.5px',
+                      borderRadius: '2px',
+                      backgroundColor: '#040070ff'
+                    }}
+                  />
+                )}
               </a>
             );
           })}
         </nav>
 
         {/* Right Side: Language Toggle & High-Impact CTA Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
           {/* Language Switcher Pill */}
           <button
             onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              padding: '0.45rem 0.85rem',
+              gap: '5px',
+              padding: '0.38rem 0.75rem',
               borderRadius: '9999px',
               border: '1px solid #E2E8F0',
               backgroundColor: '#FFFFFF',
               color: '#040070ff',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 700,
               cursor: 'pointer',
-              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
+              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
               transition: 'all 0.2s ease'
             }}
             onMouseEnter={(e) => {
@@ -201,7 +255,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
             }}
             title={lang === 'tr' ? "Switch to English" : "Türkçe'ye Geç"}
           >
-            <Globe size={14} color="#040070ff" />
+            <Globe size={13} color="#040070ff" />
             <span>{lang.toUpperCase()}</span>
           </button>
 
@@ -213,28 +267,28 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              padding: scrolled ? '0.55rem 1.35rem' : '0.62rem 1.5rem',
+              padding: scrolled ? '0.45rem 1.2rem' : '0.52rem 1.35rem',
               borderRadius: '9999px',
               border: 'none',
               background: 'linear-gradient(135deg, #040070ff 0%, #0041d7ff 100%)',
               color: '#FFFFFF',
-              fontSize: '0.875rem',
+              fontSize: '0.84rem',
               fontWeight: 700,
               cursor: 'pointer',
-              boxShadow: '0 6px 18px rgba(4, 0, 112, 0.35)',
+              boxShadow: '0 4px 14px rgba(4, 0, 112, 0.28)',
               transition: 'all 0.25s ease'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(4, 0, 112, 0.45)';
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(4, 0, 112, 0.38)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 6px 18px rgba(4, 0, 112, 0.35)';
+              e.currentTarget.style.boxShadow = '0 4px 14px rgba(4, 0, 112, 0.28)';
             }}
           >
             <span>{t.nav.getQuote}</span>
-            <ArrowRight size={15} />
+            <ArrowRight size={14} />
           </button>
 
           {/* Mobile Menu Hamburger Button */}
@@ -243,7 +297,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
               display: 'none',
-              padding: '0.55rem',
+              padding: '0.48rem',
               borderRadius: '50%',
               border: '1px solid #E2E8F0',
               backgroundColor: '#FFFFFF',
@@ -266,7 +320,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
             top: 'calc(100% + 0.5rem)',
             left: '1rem',
             right: '1rem',
-            maxWidth: '1240px',
+            maxWidth: '840px',
             margin: '0 auto',
             pointerEvents: 'auto',
             backgroundColor: 'rgba(255, 255, 255, 0.98)',
@@ -283,18 +337,18 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
           }}
         >
           {navLinks.map((item, index) => {
-            const isActive = activeHash === item.href;
+            const isActive = isPortfolioPage ? item.isRoute : activeHash === item.href;
             return (
               <a
                 key={index}
                 href={item.href}
-                onClick={(e) => handleLinkClick(e, item.href)}
+                onClick={(e) => handleLinkClick(e, item)}
                 style={{
                   fontSize: '0.95rem',
                   fontWeight: isActive ? 700 : 600,
                   color: isActive ? '#040070ff' : '#1E293B',
                   backgroundColor: isActive ? 'rgba(4, 0, 112, 0.08)' : 'transparent',
-                  padding: '0.7rem 1rem',
+                  padding: '0.75rem 1rem',
                   borderRadius: '12px',
                   textDecoration: 'none',
                   display: 'flex',
@@ -356,7 +410,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
           transform: scale(1.04);
         }
 
-        @media (min-width: 1100px) {
+        @media (min-width: 860px) {
           .desktop-nav-menu {
             display: flex !important;
           }
@@ -368,7 +422,7 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
           }
         }
 
-        @media (max-width: 1099px) {
+        @media (max-width: 859px) {
           .desktop-nav-menu {
             display: none !important;
           }
@@ -379,7 +433,8 @@ export default function Navbar({ lang, setLang, t, onOpenQuote }) {
             display: none !important;
           }
           .floating-navbar-container {
-            padding: 0.5rem 1rem !important;
+            height: 52px !important;
+            padding: 0 0.85rem !important;
           }
         }
       `}</style>

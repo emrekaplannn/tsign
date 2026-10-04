@@ -1,10 +1,58 @@
 import React from 'react';
 import Logo from './Logo';
-import { Mail, Globe, ArrowUp, Shield, FileCheck } from 'lucide-react';
+import { Mail, Globe, ArrowUp, Shield, FileCheck, Cpu } from 'lucide-react';
 
-export default function Footer({ t, onOpenQuote }) {
+const techLogos = [
+  { name: "Autodesk Revit", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/autodesk-revit-logo-png_seeklogo-482393.png" },
+  { name: "AutoCAD", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/autocad-logo-png_seeklogo-482395.png" },
+  { name: "Navisworks", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/Ekran görüntüsü 2026-04-04 171420.png" },
+  { name: "3ds Max", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/3ds-max-logo-png_seeklogo-482396.png" },
+  { name: "ideCAD", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/idecadlogo.jpg" },
+  { name: "SAP2000", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/images.png" },
+  { name: "ProtaStructure", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/ProtaStructure.png" },
+  { name: "STA4CAD", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/STALOGO.jpg" },
+  { name: "ChatGPT & GPT-4o", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/ChatGPT-Vertical-Logo-Vector.svg-.png" },
+  { name: "Google Gemini", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/Gemini-logo.png" },
+  { name: "Anthropic Claude", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/claude_ai_logo.svg" },
+  { name: "NotebookLM", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/teaser.jpg" },
+  { name: "AWS Cloud & AI", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/images.jpeg" },
+  { name: "Java & Spring", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/Java-Logo.png" },
+  { name: "Lumion", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/Lumion-3D-Logo-PNG.png" },
+  { name: "Corona Renderer", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/images (1).png" },
+  { name: "Chaos V-Ray", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/v-ray-logo-png_seeklogo-334100.png" },
+  { name: "SketchUp", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/SketchUp-logo.png" },
+  { name: "Adobe Photoshop", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/Photoshop_CC_icon.png" },
+  { name: "Fagerhult Dialux", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/aadadadad.png" },
+  { name: "Microsoft 365", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/microsoft-office-365-logo-png_seeklogo-168321.png" },
+  { name: "Google Workspace", src: "/gorsel-icerikler/logo ve appler/TSigN Uygulamaları Logoları/Google-Workspace-Logo.png" }
+];
+
+export default function Footer({ t, onOpenQuote, onOpenCareers, navigate }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleFooterLink = (e, href) => {
+    e.preventDefault();
+    if (href === '#careers' && onOpenCareers) {
+      onOpenCareers();
+      return;
+    }
+    if (href === '/portfoyumuz') {
+      if (navigate) navigate('/portfoyumuz');
+      else window.location.href = '/portfoyumuz';
+    } else {
+      if (window.location.pathname.includes('portfoyumuz')) {
+        if (navigate) navigate('/', href);
+        else window.location.href = '/' + href;
+      } else {
+        const el = document.querySelector(href);
+        if (el) {
+          const offsetTop = el.getBoundingClientRect().top + window.pageYOffset - 95;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+      }
+    }
   };
 
   return (
@@ -73,7 +121,7 @@ export default function Footer({ t, onOpenQuote }) {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '3rem',
-          marginBottom: '3.5rem'
+          marginBottom: 0
         }}>
           {/* Brand Info */}
           <div style={{ maxWidth: '320px' }}>
@@ -174,12 +222,12 @@ export default function Footer({ t, onOpenQuote }) {
               Kurumsal
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.875rem', color: '#94A3B8' }}>
-              <li><a href="#home" style={{ color: 'inherit' }}>Hakkımızda</a></li>
-              <li><a href="#team" style={{ color: 'inherit' }}>Ekibimiz & Kadro</a></li>
-              <li><a href="#projects" style={{ color: 'inherit' }}>Projeler & Referanslar</a></li>
-              <li><a href="#academy" style={{ color: 'inherit' }}>TSigN Akademi</a></li>
-              <li><a href="#careers" style={{ color: 'inherit' }}>Kariyer & Staj</a></li>
-              <li><a href="#contact" style={{ color: 'inherit' }}>İletişim & Ofis</a></li>
+              <li><a href="#home" onClick={(e) => handleFooterLink(e, '#home')} style={{ color: 'inherit' }}>Hakkımızda</a></li>
+              <li><a href="#team" onClick={(e) => handleFooterLink(e, '#team')} style={{ color: 'inherit' }}>Ekibimiz & Kadro</a></li>
+              <li><a href="/portfoyumuz" onClick={(e) => handleFooterLink(e, '/portfoyumuz')} style={{ color: 'inherit' }}>Projeler & Referanslar</a></li>
+              <li><a href="#academy" onClick={(e) => handleFooterLink(e, '#academy')} style={{ color: 'inherit' }}>TSigN Akademi</a></li>
+              <li><a href="#careers" onClick={(e) => handleFooterLink(e, '#careers')} style={{ color: 'inherit' }}>Kariyer & Staj</a></li>
+              <li><a href="#contact" onClick={(e) => handleFooterLink(e, '#contact')} style={{ color: 'inherit' }}>İletişim & Ofis</a></li>
             </ul>
           </div>
 
@@ -199,16 +247,123 @@ export default function Footer({ t, onOpenQuote }) {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
+      {/* Technology Stack Infinite Marquee Strip (Placed Just Above Copyright Bar) */}
+      <div
+        style={{
+          backgroundColor: '#07152B',
+          padding: '1.4rem 0 1.6rem 0',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <div
+          style={{
+            textAlign: 'center',
+            marginBottom: '0.85rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
+          }}
+        >
+          <Cpu size={14} color="#38BDF8" />
+          <span
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#94A3B8'
+            }}
+          >
+            Teknolojik Altyapımız & Kullandığımız Yazılımlar
+          </span>
+        </div>
+
+        {/* Ticker Container with fade masks */}
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            overflow: 'hidden',
+            maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)'
+          }}
+        >
+          <div
+            className="footer-marquee-track"
+            style={{
+              display: 'flex',
+              gap: '1.25rem',
+              width: 'max-content',
+              animation: 'marqueeLeftToRight 45s linear infinite'
+            }}
+          >
+            {[...techLogos, ...techLogos].map((tool, index) => (
+              <div
+                key={index}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '12px',
+                  padding: '0.45rem 0.95rem',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.25s ease'
+                }}
+                className="footer-tech-badge"
+              >
+                <div
+                  style={{
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '8px',
+                    backgroundColor: '#FFFFFF',
+                    padding: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.25)',
+                    flexShrink: 0
+                  }}
+                >
+                  <img
+                    src={tool.src}
+                    alt={tool.name}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain'
+                    }}
+                  />
+                </div>
+                <span
+                  style={{
+                    fontSize: '0.825rem',
+                    fontWeight: 600,
+                    color: '#E2E8F0'
+                  }}
+                >
+                  {tool.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar: Copyright & Legal */}
+      <div className="container" style={{ padding: '1.75rem 1.5rem 2.25rem 1.5rem' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: '1rem',
-          paddingTop: '2rem',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
           fontSize: '0.8125rem',
           color: '#64748B'
         }}>
@@ -236,6 +391,28 @@ export default function Footer({ t, onOpenQuote }) {
           </div>
         </div>
       </div>
+
+      {/* Marquee Animation Styles */}
+      <style>{`
+        @keyframes marqueeLeftToRight {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+
+        .footer-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        .footer-tech-badge:hover {
+          background-color: rgba(56, 189, 248, 0.12) !important;
+          border-color: rgba(56, 189, 248, 0.4) !important;
+          transform: translateY(-2px);
+        }
+      `}</style>
     </footer>
   );
 }

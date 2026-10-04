@@ -18,7 +18,7 @@ import './services/Services.css';
  * @param {Object} props.t - Localization dictionary (e.g. t.services)
  * @param {Function} [props.onOpenQuote] - Callback for opening quote request modal
  */
-export default function Services({ t, onOpenQuote }) {
+export default function Services({ t, onOpenQuote, navigate }) {
   const [activeModalService, setActiveModalService] = useState(null);
   const items = t?.services?.items || [];
 
@@ -31,7 +31,8 @@ export default function Services({ t, onOpenQuote }) {
       className="section"
       style={{
         backgroundColor: '#F8F9FA',
-        position: 'relative'
+        position: 'relative',
+        paddingBottom: '3.5rem'
       }}
     >
       <div className="container">
@@ -80,6 +81,7 @@ export default function Services({ t, onOpenQuote }) {
         service={activeModalService}
         onClose={() => setActiveModalService(null)}
         onOpenQuote={onOpenQuote}
+        navigate={navigate}
       />
     </section>
   );
